@@ -1,0 +1,9 @@
+/env
+/images
+__pycache__
+token.pickle
+/speech.wav
+/config.py
+model_small
+venv
+.idea
