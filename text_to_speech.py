@@ -16,14 +16,16 @@ model, SYMBOLS, SAMPLE_RATE, _, apply_tts = torch.hub.load(repo_or_dir='snakers4
 model = model.to(DEVICE)
 
 # Example
-audio = apply_tts(texts=[turn_on_text], sample_rate =SAMPLE_RATE, model=model, symbols=SYMBOLS, device=DEVICE)
-sd.play(audio[0], SAMPLE_RATE)
-time.sleep(len(audio[0]) / SAMPLE_RATE)
-sd.stop()
+# audio = apply_tts(texts=[turn_on_text], sample_rate =SAMPLE_RATE, model=model, symbols=SYMBOLS, device=DEVICE)
+# sd.play(audio[0], SAMPLE_RATE)
+# time.sleep(len(audio[0]) / SAMPLE_RATE)
+# sd.stop()
 
 def robotik_speak(s: str):
+    print("Robotik: " + s)
     audio = apply_tts(texts=[s], sample_rate=SAMPLE_RATE, model=model, symbols=SYMBOLS, device=DEVICE)
     sd.play(audio[0], SAMPLE_RATE)
     time.sleep(len(audio[0]) / SAMPLE_RATE)
+    time.sleep(1)
     sd.stop()
 
