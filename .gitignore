@@ -1,5 +1,5 @@
 /env
-/images
+images
 __pycache__
 token.pickle
 /speech.wav
@@ -7,3 +7,5 @@ token.pickle
 model_small
 venv
 .idea
+reduced_images
+sub_list.csv
