@@ -11,15 +11,15 @@ device = 1
 q = queue.Queue()
 
 
-def q_callback(indata, frames, time, status):
+def callback(indata, frames, time, status):
     if status:
         print(status, file=sys.stderr)
     q.put(bytes(indata))
 
 
-def va_listen(callback):
+def listen(callback):
     with sd.RawInputStream(samplerate=samplerate, blocksize=8000, device=device, dtype='int16',
-                           channels=1, callback=q_callback):
+                           channels=1, callback=callback):
 
         rec = vosk.KaldiRecognizer(model, samplerate)
         while True:
