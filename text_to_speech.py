@@ -7,7 +7,7 @@ import config
 LANGUAGE = 'en'
 MODEL_ID = 'lj_16khz'
 DEVICE = torch.device('cpu') # cpu or gpu
-turn_on_text = f'Hello master. {config.VA_NAME} just woke up from sleep, how can I help you?'
+turn_on_text = f'Hello master. {config.ROBOTIK_NAME} just woke up from sleep, how can I help you?'
 
 model, SYMBOLS, SAMPLE_RATE, _, apply_tts = torch.hub.load(repo_or_dir='snakers4/silero-models',
                                                            model='silero_tts',

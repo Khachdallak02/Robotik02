@@ -5,6 +5,8 @@ from num2words import num2words
 from PIL import Image
 import time
 import os
+from config import *
+TURN_ON_TEXT = f'Hello master. {ROBOTIK_NAME} just woke up from sleep, how can I help you?'
 
 def execute_cmd(cmd: str):
     try:
@@ -15,6 +17,12 @@ def execute_cmd(cmd: str):
         else:
             robotik_speak("Can you please repeat?")
 
+def help():
+    text = "I can "
+    text += "tell the time, "
+    text += "retail hilarious jokes, "
+    text += "send random pictures."
+    robotik_speak(text)
 
 def time():
     time_now = datetime.datetime.now()
@@ -130,12 +138,7 @@ def picture():
     img = Image.open(path + '\\' + d)
     img.show()
 
-def help():
-    text = "I can "
-    text += "tell the time, "
-    text += "retail hilarious jokes, "
-    text += "send random pictures."
-    robotik_speak(text)
+
 
 def appreciation():
     if random.random() > 0.8:
@@ -143,4 +146,4 @@ def appreciation():
     else:
         robotik_speak("Thank you. I am just your creation.")
 
-execute_cmd('appre')
+robotik_speak(TURN_ON_TEXT)

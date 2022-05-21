@@ -3,7 +3,8 @@ import sys
 import sounddevice as sd
 import queue
 import json
-
+import time
+from main import respond
 model = vosk.Model("model_small")
 samplerate = 16000
 device = 1
@@ -17,7 +18,7 @@ def callback(indata, frames, time, status):
     q.put(bytes(indata))
 
 
-def listen(callback):
+def listen():
     with sd.RawInputStream(samplerate=samplerate, blocksize=8000, device=device, dtype='int16',
                            channels=1, callback=callback):
 
@@ -25,4 +26,13 @@ def listen(callback):
         while True:
             data = q.get()
             if rec.AcceptWaveform(data):
-                callback(json.loads(rec.Result())["text"])
+                voice = rec.Result()
+                print(voice)
+                print("##################")
+
+                voice = voice[14:-3]
+                print(voice)
+                respond(str(voice))
+
+
+
