@@ -18,7 +18,7 @@ def callback(indata, frames, time, status):
     q.put(bytes(indata))
 
 
-def listen():
+def listen(response_function):
     with sd.RawInputStream(samplerate=samplerate, blocksize=8000, device=device, dtype='int16',
                            channels=1, callback=callback):
 
@@ -27,12 +27,9 @@ def listen():
             data = q.get()
             if rec.AcceptWaveform(data):
                 voice = rec.Result()
-                print(voice)
-                print("##################")
 
                 voice = voice[14:-3]
-                print(voice)
-                respond(str(voice))
+                response_function(str(voice))
 
 
 

@@ -13,7 +13,6 @@ TURN_ON_TEXT = f'Hello master. {ROBOTIK_NAME} just woke up from sleep, how can I
 
 
 def respond(voice: str):
-    print(voice)
     includes = [x in voice for x in ROBOTIK_ALIAS]
     if any(includes):
         # Robotik is being addressed
@@ -23,7 +22,15 @@ def respond(voice: str):
             execute_cmd('something else')
         else:
             execute_cmd(cmd['cmd'])
-    speech_to_text.listen()
+    else:
+        cmd = recognize_cmd(filter_cmd(voice))
+        if cmd['percent'] > 80:
+            if cmd['cmd'] not in ROBOTIK_CMD_LIST.keys():
+                execute_cmd('something else')
+            else:
+                execute_cmd(cmd['cmd'])
+        elif cmd['percent'] > 60:
+            execute_cmd('something else')
 
 
 def filter_cmd(raw_voice: str):
@@ -51,8 +58,6 @@ def recognize_cmd(cmd: str):
     return ans
 
 
-
-
 if __name__ == "__main__":
 
-    speech_to_text.listen()
+    speech_to_text.listen(respond)
