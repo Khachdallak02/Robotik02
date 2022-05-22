@@ -24,12 +24,12 @@ def respond(voice: str):
             execute_cmd(cmd['cmd'])
     else:
         cmd = recognize_cmd(filter_cmd(voice))
-        if cmd['percent'] > 80:
+        if cmd['percent'] > 50:
             if cmd['cmd'] not in ROBOTIK_CMD_LIST.keys():
                 execute_cmd('something else')
             else:
                 execute_cmd(cmd['cmd'])
-        elif cmd['percent'] > 60:
+        elif cmd['percent'] > 30:
             execute_cmd('something else')
 
 
